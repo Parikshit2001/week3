@@ -29,7 +29,9 @@ export const EthWallet = ({ mnemonic }: { mnemonic: string }) => {
           const wallet = new Wallet(privateKey);
           setCurrentIndex(currentIndex + 1);
           setAddresses([...addresses, wallet.address]);
-          const newBalance = await web3?.eth.getBalance(wallet.address);
+          const newBalance = (await web3?.eth.getBalance(
+            wallet.address
+          )) as unknown as number;
           const ether = web3?.utils.fromWei(newBalance, "ether");
           setBalances([...balances, Number(ether)]);
         }}
